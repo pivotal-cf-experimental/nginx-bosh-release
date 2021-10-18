@@ -8,7 +8,7 @@ releases:
 stemcells:
 # Centos 3421.11 _appears_ not to work under BOSH Lite
 - alias: ubuntu
-  os: ubuntu-xenial
+  os: ubuntu-bionic
   version: latest
 
 instance_groups:

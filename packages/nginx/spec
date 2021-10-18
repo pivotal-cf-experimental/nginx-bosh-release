@@ -1,8 +1,8 @@
 ---
 name: nginx
 files:
-- nginx/nginx-1.19.10.tar.gz
+- nginx/nginx-1.21.3.tar.gz
 - nginx/headers-more-nginx-module-0.30.tar.gz
-- nginx/pcre-8.40.tar.gz
+- nginx/pcre-8.45.tar.gz
 - nginx/nginx-upload-module-2.2.tar.gz
 - patches/nginx-upload-module.patch

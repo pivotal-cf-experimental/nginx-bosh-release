@@ -1,23 +1,40 @@
 ## Developer Notes
 
-Bumping version (e.g. to 1.19.1). Download latest _mainline_ release.
+Bumping version (e.g. to 1.21.3). Get latest _mainline_ release version from
+<http://nginx.org/en/download.html>.
 
 ```
-export OLD_VERSION=1.19.1
-export VERSION=1.19.10
-cd ~/workspace/nginx-release
-git pull -r
-find packages/nginx -type f -print0 |
+export OLD_VERSION=1.19.10
+export VERSION=1.21.3
+  # Download & verify nginx
+pushd ~/Downloads
+curl -OL http://nginx.org/keys/nginx_signing.key
+curl -OL http://nginx.org/keys/mdounin.key
+curl -OL http://nginx.org/download/nginx-$VERSION.tar.gz
+curl -OL http://nginx.org/download/nginx-$VERSION.tar.gz.asc
+mkdir /tmp/$$
+gpg2 --homedir /tmp/$$ --import nginx_signing.key # The canonical signing key
+gpg2 --homedir /tmp/$$ --import mdounin.key # Sometimes Maxim Dounin signs with his own key
+gpg2 --homedir /tmp/$$ --verify nginx-$VERSION.tar.gz.asc
+popd
+  # Prepare the BOSH release
+pushd ~/workspace/nginx-release
+git pull -r --autostash
+find packages/nginx -type f -print0 | \
   xargs -0 perl -pi -e \
   "s/nginx-${OLD_VERSION}/nginx-${VERSION}/g"
- # FIXME: update README.md's download URL
+sed -i "s/$OLD_VERSION/$VERSION/g" README.md
 bosh add-blob \
   ~/Downloads/nginx-${VERSION}.tar.gz \
   nginx/nginx-${VERSION}.tar.gz
 vim config/blobs.yml
   # delete `nginx/nginx-${OLD_VERSION}.tar.gz` stanza
 bosh create-release --force
+  # authenticate against BOSH Lite (BOSH on VirtualBox)
 export BOSH_ENVIRONMENT=vbox
+export BOSH_CLIENT=admin
+export BOSH_CLIENT_SECRET=`bosh int ~/deployments/vbox/creds.yml --path /admin_password`
+  # upload & test the release
 bosh upload-release
 bosh -n -d nginx \
   deploy manifests/nginx-lite.yml --recreate
