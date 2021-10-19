@@ -23,7 +23,7 @@ git pull -r --autostash
 find packages/nginx -type f -print0 | \
   xargs -0 perl -pi -e \
   "s/nginx-${OLD_VERSION}/nginx-${VERSION}/g"
-sed -i "s/$OLD_VERSION/$VERSION/g" README.md
+sed -i '' "s/$OLD_VERSION/$VERSION/g" README.md
 bosh add-blob \
   ~/Downloads/nginx-${VERSION}.tar.gz \
   nginx/nginx-${VERSION}.tar.gz
