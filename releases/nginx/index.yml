@@ -19,6 +19,8 @@ builds:
     version: 1.19.0
   da5aeb45-c7f1-4a64-7488-c685f6b4b882:
     version: 1.13.12
+  e552b271-0b56-42e1-4a2d-3f70e56e16e0:
+    version: 1.21.6
   f1f21188-2bf2-4963-4d0b-8d6148de0b7a:
     version: 1.17.0
 format-version: "2"
