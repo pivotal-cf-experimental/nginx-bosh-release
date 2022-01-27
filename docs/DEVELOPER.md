@@ -1,11 +1,11 @@
 ## Developer Notes
 
-Bumping version (e.g. to 1.21.3). Get latest _mainline_ release version from
+Bumping version (e.g. to 1.21.6). Get latest _mainline_ release version from
 <http://nginx.org/en/download.html>.
 
 ```
-export OLD_VERSION=1.19.10
-export VERSION=1.21.3
+export OLD_VERSION=1.21.3
+export VERSION=1.21.6
   # Download & verify nginx
 pushd ~/Downloads
 curl -OL http://nginx.org/keys/nginx_signing.key
