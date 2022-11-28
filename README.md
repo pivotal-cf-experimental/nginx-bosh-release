@@ -1,3 +1,9 @@
+# No Longer Maintained
+
+This release is no longer being maintained.
+
+Please use <https://github.com/bosh-packages/nginx-release> instead.
+
 # BOSH-deployed nginx Server
 
 This [BOSH](https://bosh.io/) release deploys an nginx webserver.
